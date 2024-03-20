@@ -1,0 +1,11 @@
+.navbar{
+    padding: .5rem 2rem;
+}
+
+@media screen and (max-width: 550px) {
+    .navbar{
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
