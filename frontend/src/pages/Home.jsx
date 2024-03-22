@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
     const cards = [
@@ -10,7 +11,11 @@ const Home = () => {
         {cards &&(
             cards.map((card, index)=>(
                 <div className='card' key={index}>
+                    <Link
+                        to='/disease'
+                    >
                     <p>{card}</p>
+                    </Link>
                 </div>
             ))
         )}        

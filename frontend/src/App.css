@@ -7,7 +7,7 @@
 }
 
 .logo {
-  height: 6em;
+  height: 10em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
@@ -45,7 +45,7 @@
 .card{
   /* background-color: aqua; */
   width: 45%;
-  height: 38vh;
+  height: 30vh;
   display: flex;
   justify-content: center;
   font-size: 20pt;
