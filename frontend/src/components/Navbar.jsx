@@ -14,12 +14,12 @@ const Navbar = () => {
             </form> */}
             <div className='d-flex gap-4 align-items-center'>
                 <img className="rounded-circle" src="https://picsum.photos/50" alt="" />
-                <Link
+                <a
                     className='text-white'
-                    to={'/'}
+                    href='/'
                 >
                     Welcome, Dr. Strange
-                </Link>
+                </a>
             </div>
 
             <div className="d-flex gap-3">

@@ -18,14 +18,12 @@ function App() {
     <>      
       <BrowserRouter>
         <Navbar />
-        <div className="d-flex justify-content-center align-items-center">
+        {/* <div className="d-flex justify-content-center align-items-center">
           <div>
-            {/* <a href="https://vitejs.dev" target="_blank"> */}
               <img src={viteLogo} className="logo" alt="Vite logo" />
-            {/* </a> */}
           </div>
           <h1>BetterHealth LDMS</h1>
-        </div>
+        </div> */}
         <Routes>
           <Route path='/' element={<Home />}/>
           <Route path='/login' element={'#'} />
