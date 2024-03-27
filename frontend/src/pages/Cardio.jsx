@@ -30,6 +30,20 @@ const Cardio = () => {
         // Here, you can send the form data to your backend or perform any other desired action
         console.log(formData);
 
+        axios
+        .post('http://localhost:8000/api/prediction/', formData,{
+            headers:{
+              'Content-Type':'multipart/form-data'
+            }
+          })
+        .then((res)=>{
+            console.log(res.data.risk_score)
+            setPredData(res.data.risk_score)
+          })
+          .catch((err)=>{
+            console.error(err)        
+          })
+
         setTimeout(() => {
             navigate('/results')
         }, 5000)
