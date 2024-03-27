@@ -9,5 +9,5 @@ router = DefaultRouter()
 
 urlpatterns = [
     path('', include(router.urls)),
-    # path('cows/', views.cow_list, name='list_cows'),
+    path('prediction/', views.prediction, name='prediction'),
 ]
