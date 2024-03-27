@@ -10,6 +10,7 @@ import Cancer from './pages/Cancer'
 import Diabetes from './pages/Diabetes'
 import About from './pages/About'
 import Services from './pages/Services'
+import Results from './pages/Results'
 
 
 function App() {
@@ -30,10 +31,12 @@ function App() {
           <Route path='/register' element={'#'} />
           <Route path='/logout' element={'#'} />
 
-          <Route path='/cardio' element={<Cardio />} />
+          <Route path='/cardio' element={<Cardio />} />          
           <Route path='/stroke' element={<Stroke />} />
           <Route path='/cancer' element={<Cancer />} />
           <Route path='/diabetes' element={<Diabetes />} />
+
+          <Route path='/results' element={<Results />} />
 
           <Route path='/about' element={<About />} />
           <Route path='/services' element={<Services />} />

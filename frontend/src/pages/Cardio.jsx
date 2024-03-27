@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import {useNavigate} from 'react-router-dom'
 
 const Cardio = () => {
     const [formData, setFormData] = useState({
@@ -21,11 +22,18 @@ const Cardio = () => {
           [name]: value,
         }));
       }
+
+      const navigate = useNavigate()
     
       const handleSubmit = (e) => {
         e.preventDefault();
         // Here, you can send the form data to your backend or perform any other desired action
         console.log(formData);
+
+        setTimeout(() => {
+            navigate('/results')
+        }, 5000)
+
       }
 
     // useEffect(()=>{
