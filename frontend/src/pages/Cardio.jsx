@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 const Cardio = () => {
     const [formData, setFormData] = useState({
+        patientId:'',
         age: '',
         cigsPerDay: '',
         prevalentHyp: '',
@@ -64,27 +65,31 @@ const Cardio = () => {
             <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div> */}
         <div className='page-wrapper'>
-            <h4>CardioVascular Disease Risk Factors</h4>
+            <h4>CardioVascular Disease Risk</h4>
             <hr />
             <form onSubmit={handleSubmit}>
                 <div className='d-flex gap-5 justify-content-center'>
-                    <div className="mb-3 col-3">
+                    <div className="mb-3 col-2">
+                        <label htmlFor="patientId" className="form-label">Patient ID</label>
+                        <input type="text" className="form-control" id="patientId" name="patientId" value={formData.patientId} onChange={handleChange} required/>
+                    </div>
+                    <div className="mb-3 col-2">
                         <label htmlFor="age" className="form-label">Age</label>
                         {/* <input type="number" className="form-control" id="age"/> */}
                         <select className="form-control" id="age" name="age" value={formData.age} onChange={handleChange} required>
-                            <option value="">Select</option>
+                            <option value="" disabled>Select</option>
                             {generateOptions(0, 100)}
                         </select>
                     </div>
-                    <div className="mb-3 col-3">
+                    <div className="mb-3 col-2">
                         <label htmlFor="cigsPerDay" className="form-label">Cigarettes Per Day</label>
                         {/* <input type="number" className="form-control" id="cigsPerDay"/> */}
                         <select className="form-control" id="cigsPerDay" name="cigsPerDay" value={formData.cigsPerDay} onChange={handleChange} required>
-                            <option value="">Select</option>
+                            <option value="" disabled>Select</option>
                             {generateOptions(0, 100)}
                         </select>
                     </div>
-                    <div className="mb-3 col-3">
+                    <div className="mb-3 col-2">
                         <label htmlFor="prevalentHyp" className="form-label">Hypertension</label>
                         {/* <input type="radio" className="form-control" id="prevalentHyp"/> */}
                         <div className="form-check">
