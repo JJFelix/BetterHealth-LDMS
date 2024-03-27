@@ -11,3 +11,8 @@ def prediction(request):
         print('Data retrived successfully: ', data)
         return Response(data, status=status.HTTP_200_OK)
 
+    if request.method == 'POST':
+        
+        return Response(data, status=status.HTTP_200_OK)
+
+
