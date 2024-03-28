@@ -12,6 +12,7 @@ const Diabetes = () => {
         DiffWalk: '',  
         Sex: '',  
         Age: '',   
+        disease: 'diabetes'
     })
 
     const handleChange = (e) => {

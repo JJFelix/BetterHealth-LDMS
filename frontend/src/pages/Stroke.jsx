@@ -13,6 +13,7 @@ const Stroke = () => {
         avg_glucose_level:'',
         bmi:'',
         smoking_status:'',
+        disease: 'stroke'
     })
 
     const handleChange = (e) => {

@@ -12,7 +12,8 @@ const Cancer = () => {
       wheezing:'', 
       alcohol_consuming:'', 
       coughing:'', 
-      swallowing_difficulty:''
+      swallowing_difficulty:'',
+      disease: 'cancer'
     })
 
     const handleChange = (e) => {

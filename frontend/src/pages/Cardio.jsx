@@ -13,7 +13,8 @@ const Cardio = () => {
         diaBP: '',
         BMI:'',
         heartRate: '',
-        glucose:''
+        glucose:'',
+        disease: 'cardio'
     })
 
     const [predData, setPredData] = useState(null)
