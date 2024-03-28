@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 
@@ -14,6 +15,8 @@ const Cardio = () => {
         heartRate: '',
         glucose:''
     })
+
+    const [predData, setPredData] = useState(null)
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -37,16 +40,16 @@ const Cardio = () => {
             }
           })
         .then((res)=>{
-            console.log(res.data.risk_score)
-            setPredData(res.data.risk_score)
+            console.log("risk score: ",res.data)
+            setPredData(res.data)
           })
           .catch((err)=>{
             console.error(err)        
           })
 
-        setTimeout(() => {
-            navigate('/results')
-        }, 5000)
+        // setTimeout(() => {
+        //     navigate('/results')
+        // }, 5000)
 
       }
 
@@ -86,8 +89,12 @@ const Cardio = () => {
             <p>Message here</p>
             <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div> */}
+        <div>
+            <h3>Results</h3>
+            Risk score: {predData}
+        </div>
         <div className='page-wrapper'>
-            <h4>CardioVascular Disease Risk</h4>
+            <h4>CardioVascular Disease</h4>
             <hr />
             <form onSubmit={handleSubmit}>
                 <div className='d-flex gap-5 justify-content-center'>
