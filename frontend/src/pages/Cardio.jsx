@@ -14,7 +14,7 @@ const Cardio = () => {
         BMI:'',
         heartRate: '',
         glucose:'',
-        disease: 'cardio'
+        // disease: 'cardio'
     })
 
     const [predData, setPredData] = useState(null)
@@ -86,13 +86,16 @@ const Cardio = () => {
 
   return (
     <>
-        {/* <div className='messages alert alert-success alert-dismissible fade show mt-2'>
-            <p>Message here</p>
-            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div> */}
-        <div>
+        {/* <div>
             <h3>Results</h3>
             Risk score: {predData}
+        </div> */}
+        <div className='messages alert alert-success alert-dismissible fade show mt-2'>
+            <div>
+                <h3>Results</h3>
+                Risk score: {predData}
+            </div>
+            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <div className='page-wrapper'>
             <h4>CardioVascular Disease</h4>

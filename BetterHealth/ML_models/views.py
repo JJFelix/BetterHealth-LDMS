@@ -39,6 +39,7 @@ def prediction(request):
 
             print(patient_data)        
             patient_data.pop(0)
+            patient_data.remove('cardio')
             print(patient_data)  
 
             patient_data = np.array(patient_data).reshape(1, -1)
@@ -94,13 +95,13 @@ def prediction(request):
                     value = 4
 
                 if value == "Formerly Smoked":
-                    value = 0
-                if value == "Never Smoked":
                     value = 1
-                if value == "Currently Smokes":
+                if value == "Never Smoked":
                     value = 2
-                if value == "Unknown":
+                if value == "Currently Smokes":
                     value = 3
+                if value == "Unknown":
+                    value = 0
 
                 if value == "Rural":
                     value = 0
@@ -111,6 +112,14 @@ def prediction(request):
                     value = value
                 print(value)
                 patient_data.append(value)
+
+            print(patient_data)        
+            patient_data.pop(0)
+            patient_data.remove('stroke')
+            print(patient_data)  
+
+            patient_data = np.array(patient_data).reshape(1, -1)
+            print("reshaped patient_data: ", patient_data)
 
             # load the joblib one
             model_file = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/stroke_ensemble_model.joblib'
@@ -130,14 +139,7 @@ def prediction(request):
             risk_score = proba_scores[0][1]
 
             # Assuming you have binary classification, print the probability score for class 1
-            print("Probability score for class 1 (risk score):", risk_score)
-
-            print(patient_data)        
-            patient_data.pop(0)
-            print(patient_data)  
-
-            patient_data = np.array(patient_data).reshape(1, -1)
-            print("reshaped patient_data: ", patient_data)
+            print("Probability score for class 1 (risk score):", risk_score)            
 
 
         return Response(risk_score, status=status.HTTP_200_OK)

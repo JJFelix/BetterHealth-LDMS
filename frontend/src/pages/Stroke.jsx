@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
 const Stroke = () => {
@@ -16,6 +17,8 @@ const Stroke = () => {
         disease: 'stroke'
     })
 
+    const [predData, setPredData] = useState(null)
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
@@ -27,7 +30,21 @@ const Stroke = () => {
       const handleSubmit = (e) => {
         e.preventDefault();
         // Here, you can send the form data to your backend or perform any other desired action
-        console.log(formData);
+        console.log(formData)
+
+        axios
+        .post('http://localhost:8000/api/prediction/', formData,{
+            headers:{
+              'Content-Type':'multipart/form-data'
+            }
+          })
+        .then((res)=>{
+            console.log("risk score: ",res.data)
+            setPredData(res.data)
+          })
+          .catch((err)=>{
+            console.error(err)        
+          })
       }
 
     // useEffect(()=>{
@@ -62,10 +79,14 @@ const Stroke = () => {
 
   return (
     <>
-        {/* <div className='messages alert alert-success alert-dismissible fade show mt-2'>
-            <p>Message here</p>
+        <div className='messages alert alert-success alert-dismissible fade show mt-2'>
+            <div>
+                <h3>Results</h3>
+                Risk score: {predData}
+            </div>
             <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div> */}
+        </div>
+
         <div className='page-wrapper'>
             <h4>Stroke</h4>
             <hr />
