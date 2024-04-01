@@ -1,4 +1,6 @@
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { Form } from 'react-router-dom'
 
 const Diabetes = () => {
     const [formData, setFormData] = useState({
@@ -11,9 +13,12 @@ const Diabetes = () => {
         Fruits: '',  
         DiffWalk: '',  
         Sex: '',  
-        Age: '',   
+        Age: 0,   
         disease: 'diabetes'
     })
+
+    const [predData, setPredData] = useState(null)
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -24,27 +29,85 @@ const Diabetes = () => {
       }
     
       const handleSubmit = (e) => {
-        e.preventDefault();
-        // Here, you can send the form data to your backend or perform any other desired action
-        console.log(formData);
+        e.preventDefault()
+        console.log(formData)
+
+        console.log(typeof(formData.Age));
+
+        // if (0 <= parseInt(formData.Age) <= 24){ formData.Age = 1}
+        // else if (25 <= parseInt(formData.Age) <= 29){ formData.Age = 2}
+        // else if (30 <= parseInt(formData.Age) <= 34){ formData.Age = 3}
+        // else if (35 <= parseInt(formData.Age) <= 39){ formData.Age = 4}
+        // else if (40 <= parseInt(formData.Age) <= 44){ formData.Age = 5}
+        // else if (45 <= parseInt(formData.Age) <= 49){ formData.Age = 6}
+        // else if (50 <= parseInt(formData.Age) <= 54){ formData.Age = 7}
+        // else if (55 <= parseInt(formData.Age) <= 59){ formData.Age = 8}
+        // else if (60 <= parseInt(formData.Age) <= 64){ formData.Age = 9}
+        // else if (65 <= parseInt(formData.Age) <= 69) {formData.Age = 10}
+        // else if (70 <= parseInt(formData.Age) <= 74) {formData.Age = 11}
+        // else if (parseInt(formData.Age) <= 79) {formData.Age = 12}
+        // else {formData.Age = 13} 
+
+        // switch (formData.Age){
+        //     case formData.Age <=24:
+        //         formData.Age = 1                
+        //         break
+        //     case formData.Age <=29:
+        //         formData.Age = 2
+        //         break
+        //     case formData.Age <=34:
+        //         formData.Age = 3               
+        //         break
+        //     case formData.Age <=39:
+        //         formData.Age = 4
+        //         break
+        //     case formData.Age <=44:
+        //         formData.Age = 5               
+        //         break
+        //     case formData.Age <=49:
+        //         formData.Age = 6
+        //         break
+        //     case formData.Age <=54:
+        //         formData.Age = 7               
+        //         break
+        //     case formData.Age <=59:
+        //         formData.Age = 8
+        //         break
+        //     case formData.Age <=64:
+        //         formData.Age = 9               
+        //         break
+        //     case formData.Age <=69:
+        //         formData.Age = 10
+        //         break
+        //     case formData.Age <=74:
+        //         formData.Age = 11               
+        //         break
+        //     case formData.Age <=79:
+        //         formData.Age = 12
+        //         break
+        //     case formData.Age >= 80:
+        //         formData.Age = 13
+        //         break       
+        // }
+        
+        console.log(formData)
+        
+
+        axios
+        .post('http://localhost:8000/api/prediction/', formData,{
+            headers:{
+              'Content-Type':'multipart/form-data'
+            }
+          })
+        .then((res)=>{
+            console.log("risk score: ",res.data)
+            setPredData(res.data)
+          })
+          .catch((err)=>{
+            console.error(err)        
+          })
       }
 
-    // useEffect(()=>{
-    //     const ageSelect = document.getElementById('age')
-    //     for (let i = 0; i <= 100; i++) {
-    //         const option = document.createElement('option');
-    //         option.value = i;
-    //         option.text = i;
-    //         ageSelect.add(option);
-    //     }
-    //     const cigSelect = document.getElementById('cigsPerDay')
-    //     for (let i = 0; i <= 100; i++) {
-    //         const option = document.createElement('option');
-    //         option.value = i;
-    //         option.text = i;
-    //         cigSelect.add(option);
-    //     }
-    // }, [])  
 
     const generateOptions = (start, end) => {
         const options = [];
@@ -61,10 +124,13 @@ const Diabetes = () => {
 
   return (
     <>
-        {/* <div className='messages alert alert-success alert-dismissible fade show mt-2'>
-            <p>Message here</p>
+        <div className='messages alert alert-success alert-dismissible fade show mt-2'>
+            <div>
+                <h3>Results</h3>
+                Risk score: {predData}
+            </div>
             <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div> */}
+        </div>
         <div className='page-wrapper'>
             <h4>Diabetes</h4>
             <hr />

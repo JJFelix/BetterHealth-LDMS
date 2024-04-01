@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
 const Cancer = () => {
@@ -16,6 +17,9 @@ const Cancer = () => {
       disease: 'cancer'
     })
 
+    const [predData, setPredData] = useState(null)
+
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
@@ -25,27 +29,24 @@ const Cancer = () => {
       }
     
       const handleSubmit = (e) => {
-        e.preventDefault();
-        // Here, you can send the form data to your backend or perform any other desired action
-        console.log(formData);
+        e.preventDefault()
+        console.log(formData)
+
+        axios
+        .post('http://localhost:8000/api/prediction/', formData,{
+            headers:{
+              'Content-Type':'multipart/form-data'
+            }
+          })
+        .then((res)=>{
+            console.log("risk score: ",res.data)
+            setPredData(res.data)
+          })
+          .catch((err)=>{
+            console.error(err)        
+          })
       }
 
-    // useEffect(()=>{
-    //     const ageSelect = document.getElementById('age')
-    //     for (let i = 0; i <= 100; i++) {
-    //         const option = document.createElement('option');
-    //         option.value = i;
-    //         option.text = i;
-    //         ageSelect.add(option);
-    //     }
-    //     const cigSelect = document.getElementById('cigsPerDay')
-    //     for (let i = 0; i <= 100; i++) {
-    //         const option = document.createElement('option');
-    //         option.value = i;
-    //         option.text = i;
-    //         cigSelect.add(option);
-    //     }
-    // }, [])  
 
     const generateOptions = (start, end) => {
         const options = [];
@@ -62,10 +63,13 @@ const Cancer = () => {
 
   return (
     <>
-        {/* <div className='messages alert alert-success alert-dismissible fade show mt-2'>
-            <p>Message here</p>
+        <div className='messages alert alert-success alert-dismissible fade show mt-2'>
+            <div>
+                <h3>Results</h3>
+                Risk score: {predData}
+            </div>
             <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div> */}
+        </div>
         <div className='page-wrapper'>
             <h4>Lung Cancer</h4>
             <hr />

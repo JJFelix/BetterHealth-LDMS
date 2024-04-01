@@ -14,7 +14,7 @@ const Cardio = () => {
         BMI:'',
         heartRate: '',
         glucose:'',
-        // disease: 'cardio'
+        disease: 'cardio'
     })
 
     const [predData, setPredData] = useState(null)
@@ -31,7 +31,6 @@ const Cardio = () => {
     
       const handleSubmit = (e) => {
         e.preventDefault();
-        // Here, you can send the form data to your backend or perform any other desired action
         console.log(formData);
 
         axios
@@ -53,23 +52,6 @@ const Cardio = () => {
         // }, 5000)
 
       }
-
-    // useEffect(()=>{
-    //     const ageSelect = document.getElementById('age')
-    //     for (let i = 0; i <= 100; i++) {
-    //         const option = document.createElement('option');
-    //         option.value = i;
-    //         option.text = i;
-    //         ageSelect.add(option);
-    //     }
-    //     const cigSelect = document.getElementById('cigsPerDay')
-    //     for (let i = 0; i <= 100; i++) {
-    //         const option = document.createElement('option');
-    //         option.value = i;
-    //         option.text = i;
-    //         cigSelect.add(option);
-    //     }
-    // }, [])  
 
     const generateOptions = (start, end) => {
         const options = [];
