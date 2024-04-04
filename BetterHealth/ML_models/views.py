@@ -6,6 +6,8 @@ import pickle, joblib
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
+from tensorflow.keras.models import load_model
+from joblib import load
 
 # Create your views here.
 @api_view(['GET', 'POST'])
@@ -66,8 +68,6 @@ def prediction(request):
             # Predict probability scores for the scaled input data
             proba_scores = ensemble.predict_proba(scaled_patient_data_2d)
             risk_score = proba_scores[0][1]
-
-
 
             # Assuming you have binary classification, print the probability score for class 1
             print("Probability score for class 1 (risk score):", risk_score)
@@ -228,7 +228,28 @@ def prediction(request):
 
 
             # Assuming you have binary classification, print the probability score for class 1
-            print("Probability score for class 1 (risk score):", risk_score)
+            # print("Probability score for class 1 (risk score):", risk_score)
+
+            # Recommendation
+            diabetes_model_path = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/diabetes_reco_model.h5'
+
+            diabetes_model = load_model(diabetes_model_path)
+
+            features = ['HighBP', 'HighChol', 'BMI', 'Smoker', 'HeartDiseaseorAttack',
+                    'Fruits', 'DiffWalk', 'Sex', 'Age', 'Diabetes_binary', 'Diabetes_probability',
+                    'Glycemic Index', 'Calories']
+
+            target = ['Carbohydrates', 'Protein', 'Fat', 'Magnesium Content', 'Fiber Content']
+
+            data = [[0,	1,	40,	1,	0,	1, 	0,	1, 	11,	0,	0.77701071,	0.78,	150.59]]
+
+            # Load Scaler
+            scaler_loaded = joblib.load('/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/diabetes_scaler.pkl')
+            # /home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/LSTM-Recommender-main/Scalers/diabetes_scaler.pkl')
+
+            data_scaled = scaler_loaded.transform(data)
+            recommendations = diabetes_model.predict(data_scaled)
+            print(f"Probability score for class 1 {risk_score}:<=>: Recommendations: {recommendations}")
 
         if disease == 'cancer':
             for key, value in p_data.items():

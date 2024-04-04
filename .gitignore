@@ -2,3 +2,5 @@
 migrations/
 *.joblib
 *.pkl
+*.h5
+LSTM-Recommender-main/
