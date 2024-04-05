@@ -70,7 +70,29 @@ def prediction(request):
             risk_score = proba_scores[0][1]
 
             # Assuming you have binary classification, print the probability score for class 1
-            print("Probability score for class 1 (risk score):", risk_score)
+            # print("Probability score for class 1 (risk score):", risk_score)
+
+            # Recommendation
+            cardio_model_path = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/cardio_reco_model.h5'
+
+            cardio_model = load_model(cardio_model_path)
+
+            pred_data = [[risk_score, 29.79, 227.59, 40.73, 15.53, 0.84, 611.53]]
+
+            # patient_data[0][9] = int(binary[0])
+            # patient_data[0][10] = risk_score
+
+            reco_data = np.concatenate((patient_data, pred_data), axis=1)
+
+            print(reco_data)
+            
+            # Load Scaler
+            scaler_loaded = joblib.load('/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/cvd_scaler.pkl')
+            # /home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/LSTM-Recommender-main/Scalers/diabetes_scaler.pkl')
+
+            data_scaled = scaler_loaded.transform(reco_data)
+            recommendations = cardio_model.predict(data_scaled)
+            print(f"Probability score for class 1 {risk_score}:<=>: Recommendations: {recommendations[0]}") 
 
         if disease == 'stroke':
             print('Stroke')
@@ -142,8 +164,32 @@ def prediction(request):
             risk_score = proba_scores[0][1]
 
             # Assuming you have binary classification, print the probability score for class 1
-            print("Probability score for class 1 (risk score):", risk_score)            
+            # print("Probability score for class 1 (risk score):", risk_score)     
 
+            # Recommendation
+            stroke_model_path = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/stroke_reco_model.h5'
+
+            stroke_model = load_model(stroke_model_path)
+
+            # pred_data = [[0,	1,	40,	1,	0,	1, 	0,	1, 	11,	0,	0.77701071,	0.78,	150.59]]
+            pred_data = [[risk_score, 30.36, 340.58, 0.55, 119.79, 211.45, 16.04]]
+
+            # patient_data[0][9] = int(binary[0])
+            # patient_data[0][10] = risk_score
+
+            reco_data = np.concatenate((patient_data, pred_data), axis=1)
+
+            print(reco_data)
+            
+            # Load Scaler
+            scaler_loaded = joblib.load('/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/stroke_scaler.pkl')
+            # /home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/LSTM-Recommender-main/Scalers/diabetes_scaler.pkl')
+
+            data_scaled = scaler_loaded.transform(reco_data)
+            recommendations = stroke_model.predict(data_scaled)
+
+            print(f"Probability score for class 1 {risk_score}:<=>: Recommendations: {recommendations[0]}") 
+                  
         if disease == 'diabetes':
             for key, value in p_data.items():
                 if key == 'Age':
@@ -226,9 +272,12 @@ def prediction(request):
             proba_scores = ensemble.predict_proba(scaled_patient_data_2d)
             risk_score = proba_scores[0][1]
 
+            binary = ensemble.predict(scaled_patient_data_2d)
+            # bin_p = int(binary[0])
 
             # Assuming you have binary classification, print the probability score for class 1
-            # print("Probability score for class 1 (risk score):", risk_score)
+            print("Probability score for class 1 (risk score):", risk_score)
+            print(f"Class: {binary[0]}, prob_score: {risk_score}")
 
             # Recommendation
             diabetes_model_path = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/diabetes_reco_model.h5'
@@ -241,15 +290,23 @@ def prediction(request):
 
             target = ['Carbohydrates', 'Protein', 'Fat', 'Magnesium Content', 'Fiber Content']
 
-            data = [[0,	1,	40,	1,	0,	1, 	0,	1, 	11,	0,	0.77701071,	0.78,	150.59]]
+            # pred_data = [[0,	1,	40,	1,	0,	1, 	0,	1, 	11,	0,	0.77701071,	0.78,	150.59]]
+            pred_data = [[binary[0], risk_score, 0.78, 150.59]]
 
+            # patient_data[0][9] = int(binary[0])
+            # patient_data[0][10] = risk_score
+
+            reco_data = np.concatenate((patient_data, pred_data), axis=1)
+
+            print(reco_data)
+            
             # Load Scaler
             scaler_loaded = joblib.load('/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/diabetes_scaler.pkl')
             # /home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/LSTM-Recommender-main/Scalers/diabetes_scaler.pkl')
 
-            data_scaled = scaler_loaded.transform(data)
+            data_scaled = scaler_loaded.transform(reco_data)
             recommendations = diabetes_model.predict(data_scaled)
-            print(f"Probability score for class 1 {risk_score}:<=>: Recommendations: {recommendations}")
+            print(f"Probability score for class 1 {risk_score}:<=>: Recommendations: {recommendations[0]}")
 
         if disease == 'cancer':
             for key, value in p_data.items():
@@ -292,11 +349,33 @@ def prediction(request):
             proba_scores = ensemble.predict_proba(scaled_patient_data_2d)
             risk_score = proba_scores[0][1]
 
-
+            binary = ensemble.predict(scaled_patient_data_2d)
 
             # Assuming you have binary classification, print the probability score for class 1
-            print("Probability score for class 1 (risk score):", risk_score)
+            # print("Probability score for class 1 (risk score):", risk_score)
 
-        return Response(risk_score, status=status.HTTP_200_OK)
+            # Recommendation
+            cancer_model_path = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/cancer_reco_model.h5'
+
+            cancer_model = load_model(cancer_model_path)
+
+            pred_data = [[binary[0], risk_score, 32.11, 116.08]]
+
+            # patient_data[0][9] = int(binary[0])
+            # patient_data[0][10] = risk_score
+
+            reco_data = np.concatenate((patient_data, pred_data), axis=1)
+
+            print(reco_data)
+            
+            # Load Scaler
+            scaler_loaded = joblib.load('/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/cancer_scaler.pkl')
+            # /home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/LSTM-Recommender-main/Scalers/diabetes_scaler.pkl')
+
+            data_scaled = scaler_loaded.transform(reco_data)
+            recommendations = cancer_model.predict(data_scaled)
+            print(f"Probability score for class 1 {risk_score}:<=>: Recommendations: {recommendations[0]}") 
+
+        return Response([risk_score, recommendations], status=status.HTTP_200_OK)
 
 

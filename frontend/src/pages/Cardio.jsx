@@ -75,7 +75,14 @@ const Cardio = () => {
         <div className='messages alert alert-success alert-dismissible fade show mt-2'>
             <div>
                 <h3>Results</h3>
-                Risk score: {predData}
+                <div>Risk score: {predData && (predData[0])}</div>
+                Recommendations: {
+                predData && (
+                    predData[1][0].map((data, index)=>(
+                        <div key={index}>{data}</div>
+                    ))
+                )
+                }
             </div>
             <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
