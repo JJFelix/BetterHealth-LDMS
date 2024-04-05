@@ -73,7 +73,7 @@ def prediction(request):
             # print("Probability score for class 1 (risk score):", risk_score)
 
             # Recommendation
-            cardio_model_path = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/cardio_reco_model.h5'
+            cardio_model_path = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/cardio_reco_model_1.h5'
 
             cardio_model = load_model(cardio_model_path)
 
@@ -87,7 +87,7 @@ def prediction(request):
             print(reco_data)
             
             # Load Scaler
-            scaler_loaded = joblib.load('/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/cvd_scaler.pkl')
+            scaler_loaded = joblib.load('/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/cardio_reco_scaler.pkl')
             # /home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/LSTM-Recommender-main/Scalers/diabetes_scaler.pkl')
 
             data_scaled = scaler_loaded.transform(reco_data)
@@ -167,7 +167,7 @@ def prediction(request):
             # print("Probability score for class 1 (risk score):", risk_score)     
 
             # Recommendation
-            stroke_model_path = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/stroke_reco_model.h5'
+            stroke_model_path = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/stroke_reco_model_1.h5'
 
             stroke_model = load_model(stroke_model_path)
 
@@ -182,7 +182,7 @@ def prediction(request):
             print(reco_data)
             
             # Load Scaler
-            scaler_loaded = joblib.load('/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/stroke_scaler.pkl')
+            scaler_loaded = joblib.load('/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/stroke_reco_scaler.pkl')
             # /home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/LSTM-Recommender-main/Scalers/diabetes_scaler.pkl')
 
             data_scaled = scaler_loaded.transform(reco_data)
@@ -280,7 +280,7 @@ def prediction(request):
             print(f"Class: {binary[0]}, prob_score: {risk_score}")
 
             # Recommendation
-            diabetes_model_path = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/diabetes_reco_model.h5'
+            diabetes_model_path = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/diabetes_reco_model_1.h5'
 
             diabetes_model = load_model(diabetes_model_path)
 
@@ -301,7 +301,7 @@ def prediction(request):
             print(reco_data)
             
             # Load Scaler
-            scaler_loaded = joblib.load('/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/diabetes_scaler.pkl')
+            scaler_loaded = joblib.load('/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/diabetes_reco_scaler.pkl')
             # /home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/LSTM-Recommender-main/Scalers/diabetes_scaler.pkl')
 
             data_scaled = scaler_loaded.transform(reco_data)
@@ -355,7 +355,7 @@ def prediction(request):
             # print("Probability score for class 1 (risk score):", risk_score)
 
             # Recommendation
-            cancer_model_path = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/cancer_reco_model.h5'
+            cancer_model_path = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/cancer_reco_model_1.h5'
 
             cancer_model = load_model(cancer_model_path)
 
@@ -369,7 +369,7 @@ def prediction(request):
             print(reco_data)
             
             # Load Scaler
-            scaler_loaded = joblib.load('/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/cancer_scaler.pkl')
+            scaler_loaded = joblib.load('/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/cancer_reco_scaler.pkl')
             # /home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/LSTM-Recommender-main/Scalers/diabetes_scaler.pkl')
 
             data_scaled = scaler_loaded.transform(reco_data)
