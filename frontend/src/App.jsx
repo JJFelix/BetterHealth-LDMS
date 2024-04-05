@@ -3,14 +3,19 @@ import viteLogo from '/logo.png'
 import './App.css'
 import Navbar from './components/Navbar'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Home from './pages/Home'
-import Cardio from './pages/Cardio'
-import Stroke from './pages/Stroke'
-import Cancer from './pages/Cancer'
-import Diabetes from './pages/Diabetes'
+import PatientHome from './pages/patient/PatientHome'
+import DoctorHome from './pages/doctor/DoctorHome'
+import Cardio from './pages/doctor/Cardio'
+import Stroke from './pages/doctor/Stroke'
+import Cancer from './pages/doctor/Cancer'
+import Diabetes from './pages/doctor/Diabetes'
 import About from './pages/About'
 import Services from './pages/Services'
 import Results from './pages/Results'
+import Register from './pages/Register'
+import Login from './pages/Login'
+import CreateProfile from './pages/CreateProfile'
+import PatientManageDataAccess from './pages/patient/ManageAccess'
 
 
 function App() {
@@ -26,9 +31,11 @@ function App() {
           <h1>BetterHealth LDMS</h1>
         </div> */}
         <Routes>
-          <Route path='/' element={<Home />}/>
-          <Route path='/login' element={'#'} />
-          <Route path='/register' element={'#'} />
+          <Route exact path='/' element={<PatientHome />}/>
+          <Route exact path='/patient' element={<PatientHome/>}/>
+          <Route path='/doctor' element={<DoctorHome/>}/>
+          <Route path='/login' element={<Login/>} />
+          <Route path='/register' element={<Register/>} />
           <Route path='/logout' element={'#'} />
 
           <Route path='/cardio' element={<Cardio />} />          
@@ -40,7 +47,8 @@ function App() {
 
           <Route path='/about' element={<About />} />
           <Route path='/services' element={<Services />} />
-
+          <Route path='/create-profile' element={<CreateProfile />} />
+          <Route exact path="/patient/manage-access" element={<PatientManageDataAccess/>}/>
 
         </Routes>
       </BrowserRouter>
