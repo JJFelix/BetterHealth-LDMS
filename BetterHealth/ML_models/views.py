@@ -359,7 +359,7 @@ def prediction(request):
 
             cancer_model = load_model(cancer_model_path)
 
-            pred_data = [[binary[0], risk_score, 32.11, 116.08]]
+            pred_data = [[binary[0], risk_score, 55.12, 389.13]]
 
             # patient_data[0][9] = int(binary[0])
             # patient_data[0][10] = risk_score
