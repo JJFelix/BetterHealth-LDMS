@@ -47,6 +47,8 @@ const Cancer = () => {
           })
       }
 
+      const labels = ['Carbohydrates', 'Protein', 'Fat', 'Sodium Content', 'Fiber Content']
+
 
     const generateOptions = (start, end) => {
         const options = [];
@@ -66,11 +68,11 @@ const Cancer = () => {
         <div className='messages alert alert-success alert-dismissible fade show mt-2'>
             <div>
                 <h3>Results</h3>
-                <div>Risk score: {predData && (predData[0])}</div>
+                <div>Risk score: {predData && (Number(predData[0].toExponential(4)))}</div>
                 Recommendations: {
                 predData && (
                     predData[1][0].map((data, index)=>(
-                        <div key={index}>{data}</div>
+                        <div key={index}>{labels[index]} : {Number(data.toExponential(4))}</div>
                     ))
                 )
                 }
