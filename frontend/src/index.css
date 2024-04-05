@@ -70,3 +70,21 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.form-section{
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  padding: 3px;
+  border-radius: 5px;
+}
+
+.form{
+  padding: 5px;
+  margin-top: 10px;
+}
+ .form input{
+  margin: 15px 3px;
+ }
+
+.form select{
+  margin: 15px 3px;
+}
