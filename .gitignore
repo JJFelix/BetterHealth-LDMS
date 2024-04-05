@@ -2,3 +2,4 @@
 migrations/
 *.joblib
 *.pkl
+*h5
