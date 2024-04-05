@@ -14,7 +14,7 @@ const Cardio = () => {
         BMI:'',
         heartRate: '',
         glucose:'',
-        // disease: 'cardio'
+        disease: 'cardio'
     })
 
     const [predData, setPredData] = useState(null)
@@ -31,7 +31,6 @@ const Cardio = () => {
     
       const handleSubmit = (e) => {
         e.preventDefault();
-        // Here, you can send the form data to your backend or perform any other desired action
         console.log(formData);
 
         axios
@@ -53,23 +52,6 @@ const Cardio = () => {
         // }, 5000)
 
       }
-
-    // useEffect(()=>{
-    //     const ageSelect = document.getElementById('age')
-    //     for (let i = 0; i <= 100; i++) {
-    //         const option = document.createElement('option');
-    //         option.value = i;
-    //         option.text = i;
-    //         ageSelect.add(option);
-    //     }
-    //     const cigSelect = document.getElementById('cigsPerDay')
-    //     for (let i = 0; i <= 100; i++) {
-    //         const option = document.createElement('option');
-    //         option.value = i;
-    //         option.text = i;
-    //         cigSelect.add(option);
-    //     }
-    // }, [])  
 
     const generateOptions = (start, end) => {
         const options = [];
@@ -93,7 +75,14 @@ const Cardio = () => {
         <div className='messages alert alert-success alert-dismissible fade show mt-2'>
             <div>
                 <h3>Results</h3>
-                Risk score: {predData}
+                <div>Risk score: {predData && (Number(predData[0].toExponential(4)))}</div>
+                Recommendations: {
+                predData && (
+                    predData[1][0].map((data, index)=>(
+                        <div key={index}>{labels[index]} : {Number(data.toExponential(4))}</div>
+                    ))
+                )
+                }
             </div>
             <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
