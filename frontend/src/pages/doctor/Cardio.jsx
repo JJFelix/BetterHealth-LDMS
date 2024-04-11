@@ -97,8 +97,8 @@ const Cardio = () => {
                                 <label for="inputState">Hypertension</label>
                                 <select id="inputState" class="form-control" name='hypertension' value={values.hypertension} onChange={handleChange}>
                                     <option selected>Choose...</option>
-                                    <option value="Yes">Yes</option>
-                                    <option value="No">No</option>
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3">

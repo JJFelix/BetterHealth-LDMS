@@ -18,6 +18,7 @@ def prediction(request):
         return Response(data, status=status.HTTP_200_OK)
 
     if request.method == 'POST':
+        print("We received the data")
         # read incoming data
         p_data = request.data
         print(p_data)
@@ -41,7 +42,7 @@ def prediction(request):
                 patient_data.append(value)
 
             print(patient_data)        
-            patient_data.pop(0)
+            #patient_data.pop(0)
             patient_data.remove('cardio')
             print(patient_data)  
 
@@ -53,10 +54,10 @@ def prediction(request):
             #     model_data = pickle.load(file)
 
             # load the joblib one
-            model_file = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/cardio_ensemble_model.joblib'
+            model_file = '../../models/cardio_ensemble_model.joblib'
             ensemble = joblib.load(model_file)
 
-            scaler_file = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/cardio_scaler.joblib'
+            scaler_file = '../../models/cardio_scaler.joblib'
             scaler = joblib.load(scaler_file)       
 
             # Transform the input data using the StandardScaler
@@ -73,7 +74,7 @@ def prediction(request):
             # print("Probability score for class 1 (risk score):", risk_score)
 
             # Recommendation
-            cardio_model_path = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/cardio_reco_model_1.h5'
+            cardio_model_path = '../../models/cardio_reco_model_1.h5'
 
             cardio_model = load_model(cardio_model_path)
 
@@ -87,7 +88,7 @@ def prediction(request):
             print(reco_data)
             
             # Load Scaler
-            scaler_loaded = joblib.load('/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/cardio_reco_scaler.pkl')
+            scaler_loaded = joblib.load('../../models/cardio_reco_scaler.pkl')
             # /home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/LSTM-Recommender-main/Scalers/diabetes_scaler.pkl')
 
             data_scaled = scaler_loaded.transform(reco_data)
@@ -147,10 +148,10 @@ def prediction(request):
             print("reshaped patient_data: ", patient_data)
 
             # load the joblib one
-            model_file = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/stroke_ensemble_model.joblib'
+            model_file = '../../models/stroke_ensemble_model.joblib'
             ensemble = joblib.load(model_file)
 
-            scaler_file = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/stroke_scaler.joblib'
+            scaler_file = '../../models/stroke_scaler.joblib'
             scaler = joblib.load(scaler_file)       
 
             # Transform the input data using the StandardScaler
@@ -167,7 +168,7 @@ def prediction(request):
             # print("Probability score for class 1 (risk score):", risk_score)     
 
             # Recommendation
-            stroke_model_path = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/stroke_reco_model_1.h5'
+            stroke_model_path = '../../models/stroke_reco_model_1.h5'
 
             stroke_model = load_model(stroke_model_path)
 
@@ -182,7 +183,7 @@ def prediction(request):
             print(reco_data)
             
             # Load Scaler
-            scaler_loaded = joblib.load('/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/stroke_reco_scaler.pkl')
+            scaler_loaded = joblib.load('../../models/stroke_reco_scaler.pkl')
             # /home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/LSTM-Recommender-main/Scalers/diabetes_scaler.pkl')
 
             data_scaled = scaler_loaded.transform(reco_data)
@@ -231,9 +232,9 @@ def prediction(request):
                 elif value == "no":
                     value = 0
 
-                if value == "Male":
+                if value == "M":
                     value = 1
-                if value == "Female":
+                if value == "F":
                     value = 0
                 
                 else:
@@ -242,7 +243,7 @@ def prediction(request):
                 patient_data.append(value)
 
             print(patient_data)        
-            patient_data.pop(0)
+            #patient_data.pop(0)
             patient_data.remove('diabetes')
             print(patient_data)  
 
@@ -255,11 +256,11 @@ def prediction(request):
 
             # load the joblib one
             # model_file = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/diabetes_ensemble_model2.joblib'
-            model_file = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/diabetes_ensemble_model1.joblib'
+            model_file = '../../models/diabetes_ensemble_model1.joblib'
 
             ensemble = joblib.load(model_file)
 
-            scaler_file = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/diabetes_scaler.joblib'
+            scaler_file = '../../models/diabetes_scaler.joblib'
             scaler = joblib.load(scaler_file)       
 
             # Transform the input data using the StandardScaler
@@ -280,7 +281,7 @@ def prediction(request):
             print(f"Class: {binary[0]}, prob_score: {risk_score}")
 
             # Recommendation
-            diabetes_model_path = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/diabetes_reco_model_1.h5'
+            diabetes_model_path = '../../models/diabetes_reco_model_1.h5'
 
             diabetes_model = load_model(diabetes_model_path)
 
@@ -301,7 +302,7 @@ def prediction(request):
             print(reco_data)
             
             # Load Scaler
-            scaler_loaded = joblib.load('/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/diabetes_reco_scaler.pkl')
+            scaler_loaded = joblib.load('../../models/diabetes_reco_scaler.pkl')
             # /home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/LSTM-Recommender-main/Scalers/diabetes_scaler.pkl')
 
             data_scaled = scaler_loaded.transform(reco_data)
@@ -333,10 +334,10 @@ def prediction(request):
             #     model_data = pickle.load(file)
 
             # load the joblib one
-            model_file = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/cancer_ensemble_model.joblib'
+            model_file = '../../models/cancer_ensemble_model.joblib'
             ensemble = joblib.load(model_file)
 
-            scaler_file = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/cancer_scaler.joblib'
+            scaler_file = '../../models/cancer_scaler.joblib'
             scaler = joblib.load(scaler_file)       
 
             # Transform the input data using the StandardScaler
@@ -355,7 +356,7 @@ def prediction(request):
             # print("Probability score for class 1 (risk score):", risk_score)
 
             # Recommendation
-            cancer_model_path = '/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/cancer_reco_model_1.h5'
+            cancer_model_path = '../../models/cancer_reco_model_1.h5'
 
             cancer_model = load_model(cancer_model_path)
 
@@ -369,13 +370,26 @@ def prediction(request):
             print(reco_data)
             
             # Load Scaler
-            scaler_loaded = joblib.load('/home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/cancer_reco_scaler.pkl')
+            scaler_loaded = joblib.load('../../models/cancer_reco_scaler.pkl')
             # /home/felix/Code/DevPortfolio/FinalYearProject/BetterHealth-LDMS/BetterHealth/ML_models/LSTM-Recommender-main/Scalers/diabetes_scaler.pkl')
 
             data_scaled = scaler_loaded.transform(reco_data)
             recommendations = cancer_model.predict(data_scaled)
             print(f"Probability score for class 1 {risk_score}:<=>: Recommendations: {recommendations[0]}") 
+        
+        # return Response("Success", status=status.HTTP_200_OK)
+        #create the response:
 
-        return Response([risk_score, recommendations], status=status.HTTP_200_OK)
+        print(recommendations)
+        response = {
+            "riskScore": risk_score,
+            "recommendation1": recommendations[0][0],
+            "recommendation2": recommendations[0][1],
+            "recommendation3": recommendations[0][2],
+            "recommendation4": recommendations[0][3],
+            "recommendation5": recommendations[0][4],
+        }
+
+        return Response(response, status=status.HTTP_200_OK)
 
 

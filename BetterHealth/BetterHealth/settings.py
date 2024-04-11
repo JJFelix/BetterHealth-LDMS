@@ -120,7 +120,7 @@ USE_I18N = True
 USE_TZ = True
 
 CORS_ORIGIN_WHITELIST =[
-    'http://localhost:5173',
+    'http://localhost:5173', 'http://127.0.0.1:8081'
 ]
 
 # Static files (CSS, JavaScript, Images)

@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import axios from 'axios'
 import {useSelector} from 'react-redux'
+import ReactLoading from 'react-loading'
 
 const Diabetes = () => {
     const [accessGrants, setAccessGrants] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
     const baseurl = "http://127.0.0.1:8081/api/v1/"
     const accessToken = useSelector((state)=>state.auth.accessToken)
 
@@ -25,7 +27,15 @@ const Diabetes = () => {
     }, [])
 
     const onSubmit = () =>{
-
+        setIsLoading(true)
+        console.log(values)
+        axios.post(baseurl+'patient/diabetes/update', values, config).then((resp)=>{
+            console.log(resp.data)
+            setIsLoading(false)
+        }).catch((err)=>{
+            console.error(err)
+            setIsLoading(false)
+        })
     }
 
     const {values, handleSubmit, handleChange} = useFormik({
@@ -37,7 +47,7 @@ const Diabetes = () => {
             heartDisease: '',
             fruits: '',
             difficultyWalking:'',
-            highBloodPressure: ''
+            highBP: ''
         },
         onSubmit
     })
@@ -69,12 +79,12 @@ const Diabetes = () => {
                             <div className='row justify-content-center col-md-12'>
                                 <div class="form-group col-md-3">
                                     <label for="inputState">Patient</label>
-                                    <select id="inputState" class="form-control" name='patientId' value={values.patientId} onChange={handleChange}>
+                                    <select id="inputState" className="form-control" name='patientId' value={values.patientId} onChange={handleChange}>
                                         <option selected>Select</option>
                                         {
                                             accessGrants.map((accessGrant, id)=>{
                                                 return(
-                                                    <option key={id}>{accessGrant.patient.firstName} {accessGrant.patient.lastName}</option>
+                                                    <option key={id} value={accessGrant.patient.id}>{accessGrant.patient.firstName} {accessGrant.patient.lastName}</option>
                                                 )
                                             })
                                         }
@@ -90,49 +100,52 @@ const Diabetes = () => {
                                 <label for="inputState">High Cholesterol</label>
                                 <select id="inputState" class="form-control" name='highCholesterol' value={values.highCholesterol} onChange={handleChange}>
                                     <option selected>Choose...</option>
-                                    <option>Yes</option>
-                                    <option>No</option>
+                                    <option value='yes'>Yes</option>
+                                    <option value='no'>No</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputState">Smoker</label>
                                 <select id="inputState" class="form-control" name='smoker' value={values.smoker} onChange={handleChange}>
                                     <option selected>Choose...</option>
-                                    <option>Yes</option>
-                                    <option>No</option>
+                                    <option value='yes'>Yes</option>
+                                    <option value='no'>No</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputState">Heart Disease/Attack</label>
                                 <select id="inputState" class="form-control" name='heartDisease' value={values.heartDisease} onChange={handleChange}>
                                     <option selected>Choose...</option>
-                                    <option>Yes</option>
-                                    <option>No</option>
+                                    <option value='yes'>Yes</option>
+                                    <option value='no'>No</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputState">Fruits</label>
                                 <select id="inputState" class="form-control" name='fruits' value={values.fruits} onChange={handleChange}>
                                     <option selected>Choose...</option>
-                                    <option>Yes</option>
-                                    <option>No</option>
+                                    <option value='yes'>Yes</option>
+                                    <option value='no'>No</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputState">Difficulty Walking</label>
                                 <select id="inputState" class="form-control" name='difficultyWalking' value={values.difficultyWalking} onChange={handleChange}>
                                     <option selected>Choose...</option>
-                                    <option>Yes</option>
-                                    <option>No</option>
+                                    <option value='yes'>Yes</option>
+                                    <option value='no'>No</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputState">High Blood Pressure</label>
-                                <select id="inputState" class="form-control" name='highBloodPressure' value={values.highBloodPressure} onChange={handleChange}>
+                                <select id="inputState" class="form-control" name='highBP' value={values.highBP} onChange={handleChange}>
                                     <option selected>Choose...</option>
-                                    <option>Yes</option>
-                                    <option>No</option>
+                                    <option value='yes'>Yes</option>
+                                    <option value='no'>No</option>
                                 </select>
+                            </div>
+                            <div className='col-md-6'>
+                                <button className='btn btn-primary' onClick={handleSubmit} type='submit'>{isLoading ? <ReactLoading type='spin' color='#3f4d67' height={22} width={22}/>:'Submit'}</button>
                             </div>
 
                         </div>
