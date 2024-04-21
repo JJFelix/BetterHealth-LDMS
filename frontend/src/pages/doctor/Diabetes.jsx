@@ -3,8 +3,11 @@ import { useFormik } from 'formik'
 import axios from 'axios'
 import {useSelector} from 'react-redux'
 import ReactLoading from 'react-loading'
+import { useNavigate } from 'react-router-dom'
+import viteLogo from '/logo.png'
 
 const Diabetes = () => {
+    const navigate = useNavigate()
     const [accessGrants, setAccessGrants] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const baseurl = "http://127.0.0.1:8081/api/v1/"
@@ -32,6 +35,8 @@ const Diabetes = () => {
         axios.post(baseurl+'patient/diabetes/update', values, config).then((resp)=>{
             console.log(resp.data)
             setIsLoading(false)
+            resp.data['disease'] = 'diabetes'
+            navigate('/recommendation-results', {state: resp.data} )
         }).catch((err)=>{
             console.error(err)
             setIsLoading(false)
@@ -60,12 +65,13 @@ const Diabetes = () => {
             <p>Message here</p>
             <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div> */}
-        <div>
-            <br/>
-            <br/>
-            <br/>
-            <h3>Results</h3>
-            Risk score: xxx
+        <div className="d-flex justify-content-center align-items-center">
+          <div>
+            {/* <a href="https://vitejs.dev" target="_blank"> */}
+              <img src={viteLogo} className="logo" alt="Vite logo" />
+            {/* </a> */}
+          </div>
+          <h1>BetterHealth LDMS</h1>
         </div>
         <div className="container">
             <br/>

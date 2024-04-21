@@ -98,15 +98,14 @@ def prediction(request):
         if disease == 'stroke':
             print('Stroke')
             for key, value in p_data.items():
-                # print(value)
                 if value == 'yes':
                     value = 1
                 if value == "no":
                     value = 0
 
-                if value == "Male":
+                if value == "M":
                     value = 1
-                if value == "Female":
+                if value == "F":
                     value = 0
 
                 if value == "Government Job":
@@ -140,7 +139,7 @@ def prediction(request):
                 patient_data.append(value)
 
             print(patient_data)        
-            patient_data.pop(0)
+            #patient_data.pop(0)
             patient_data.remove('stroke')
             print(patient_data)  
 
@@ -322,7 +321,7 @@ def prediction(request):
                 patient_data.append(value)
 
             print(patient_data)        
-            patient_data.pop(0)
+            #patient_data.pop(0)
             patient_data.remove('cancer')
             print(patient_data)  
 

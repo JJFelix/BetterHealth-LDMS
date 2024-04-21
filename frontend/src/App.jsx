@@ -16,7 +16,7 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 import CreateProfile from './pages/CreateProfile'
 import PatientManageDataAccess from './pages/patient/ManageAccess'
-
+import RecommenadtionResults from './pages/doctor/results'
 
 function App() {
 
@@ -49,6 +49,7 @@ function App() {
           <Route path='/services' element={<Services />} />
           <Route path='/create-profile' element={<CreateProfile />} />
           <Route exact path="/patient/manage-access" element={<PatientManageDataAccess/>}/>
+          <Route exact path='/recommendation-results' element={<RecommenadtionResults/>}/>
 
         </Routes>
       </BrowserRouter>
